@@ -1,22 +1,19 @@
 package com.festas.SID.api;
 
-import java.io.Console;
+
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.util.ReflectionUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -39,6 +36,7 @@ import com.festas.SID.domain.repository.ClienteRepository;
 import com.festas.SID.domain.service.OperacoesDeClienteService;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping(value = "/api/clientes")
 public class ClienteController {
 
@@ -59,6 +57,9 @@ public class ClienteController {
  			if( clienteCadastrado != null) {
  				throw new NegocioException("Cliente já cadastrado com este CPF ou CNPJ !");
  			}
+ 			
+ 			
+ 			cliente.setStatus("1");
  			
 			cliente = operacoesDeClienteService.salvar(cliente);
 			return ResponseEntity.status(HttpStatus.CREATED).body(cliente);
@@ -89,7 +90,7 @@ public class ClienteController {
 		try {
 			Cliente clienteAtual = operacoesDeClienteService.buscarOuFalhar(clienteId);
 			
-			BeanUtils.copyProperties(cliente, clienteAtual, "id");
+			BeanUtils.copyProperties(cliente, clienteAtual, "id", "datacadastro");
 
 			return operacoesDeClienteService.salvar(clienteAtual);
 		} catch (EntidadeNaoEncontradaException e) {

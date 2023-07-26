@@ -5,7 +5,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import com.festas.SID.domain.repository.ClienteRepository;
-import com.festas.SID.domain.execption.EntidadeEmUsoException;
 import com.festas.SID.domain.execption.ClienteNaoEncontradaException;
 import com.festas.SID.domain.execption.EntidadeNaoEncontradaException;
 import com.festas.SID.domain.model.Cliente;

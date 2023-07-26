@@ -1,16 +1,13 @@
 package com.festas.SID.domain.model;
 
-import java.sql.Date;
-import java.time.LocalDateTime;
 
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import org.hibernate.annotations.CreationTimestamp;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -68,12 +65,25 @@ public class Cliente {
 	// @Column(name = "telefone1", nullable=false)
 	private String telefone1;	
 	
-	
 	@Column
 	// @Column(name = "telefone1", nullable=false)
 	private String telefone2;	
-		
 
 	
+	@Column
+	private String endereco;	
+	
+	@Column
+	private String bairro;	
+	
+	@Column
+	private String numero;	
+	
+	@Column
+	private String cep;	
+	
+	@Column
+	private Integer cidade_id;	
+
 	
 }
